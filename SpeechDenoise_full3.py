@@ -9,11 +9,16 @@ from math import log
 import matplotlib.pyplot as plt
 from joblib import Parallel, delayed
 import multiprocessing
+import logging
+logging.basicConfig(
+    format='%(asctime)s: %(message)s',
+    level='INFO',
+    datefmt='%m/%d/%Y %I:%M:%S %p')
 
-# print num cores
+# logging.info(num cores
 num_cores = multiprocessing.cpu_count()
-print('num_cores:')
-print(num_cores)
+logging.info('num_cores:')
+logging.info(num_cores)
 
 
 def sampleS(S, k):
@@ -29,17 +34,18 @@ def sampleS(S, k):
 
 def buffer(signal, L, M):
     if M >= L:
-        print('Error: Overlapping windows cannot be larger than frame length!')
+        logging.info(
+            'Error: Overlapping windows cannot be larger than frame length!')
         sys.exit()
 #
     len_signal = len(signal)
     #
-    print('The signal length is %s: ' % (len_signal))
+    logging.info('The signal length is %s: ' % (len_signal))
     #
     K = np.ceil(len_signal / L).astype('int')  # num_frames
     #
-    print('The number of frames \'K\' is %s: ' % (K))
-    print('The length of each frame \'L\' is %s: ' % (L))
+    logging.info('The number of frames \'K\' is %s: ' % (K))
+    logging.info('The length of each frame \'L\' is %s: ' % (L))
     #
     X_tmp = []
     k = 1
@@ -49,14 +55,14 @@ def buffer(signal, L, M):
         if start_ind == len_signal:
             break
         elif (end_ind > len_signal):
-            # print ('k=%s, [%s, %s] ' % (k, start_ind, end_ind - 1))
+            # logging.info(('k=%s, [%s, %s] ' % (k, start_ind, end_ind - 1))
             val_in = len_signal - start_ind
             tmp_seg = np.zeros(L)
             tmp_seg[:val_in] = signal[start_ind:]
             X_tmp.append(tmp_seg)
             break
         else:
-            # print ('k=%s, [%s, %s] ' % (k, start_ind, end_ind - 1))
+            # logging.info(('k=%s, [%s, %s] ' % (k, start_ind, end_ind - 1))
             X_tmp.append(signal[start_ind:end_ind])
         k += 1
 
@@ -207,16 +213,16 @@ def adaptiveSampling_adam(f,
     while len(X) < k and len(S + X) > k:
         currentVal = f.function(X)
 
-        print currentVal, 'ground set remaining:', len(
-            S), 'size of current solution:', len(X)
+        logging.info([currentVal, 'ground set remaining:', len(S),
+                     'size of current solution:', len(X)])
         samples = []
         samplesVal = []
 
         # PARALLELIZE THIS LOOP it is emb. parallel
         def sample_elements():
-            #print len(S), 'is len(S)'
+            #logging.info(len(S), 'is len(S)'
             sample = sampleS(S, k / r)
-            #print len(S), 'is len(S);', k/r, 'is k/r', k,'is k', r, 'is r', len(sample), 'is len sample'
+            #logging.info(len(S), 'is len(S);', k/r, 'is k/r', k,'is k', r, 'is r', len(sample), 'is len sample'
 
             #sampleVal = f.functionMarg(sample, X)
             sampleVal = f.functionMarg_better(sample, X)
@@ -224,22 +230,22 @@ def adaptiveSampling_adam(f,
             samples.append(sample)
 
         if parallel:
-            Parallel(n_jobs=num_cores)(delayed(sample_elements) for i in range(numSamples))
+            Parallel(n_jobs=num_cores)(
+                delayed(sample_elements) for i in range(numSamples))
 
         else:
             for i in range(numSamples):
                 sample_elements()
 
-        
         maxSampleVal = max(samplesVal)
         bestSample = samples[samplesVal.index(maxSampleVal)]
 
         if maxSampleVal >= (opt - currentVal) / (alpha1 * float(r)):
             X += bestSample
-            #print len(X), 'is len(X)'
+            #logging.info(len(X), 'is len(X)'
             for node in bestSample:
                 S.remove(node)
-                #print len(S), 'is len(S) after removing an element from best sample'
+                #logging.info(len(S), 'is len(S) after removing an element from best sample'
 
             # Now we need to do some bookkeeping just for the audio de-noising objective:
             for I_ind_k_min in bestSample:
@@ -250,7 +256,7 @@ def adaptiveSampling_adam(f,
                 k_min = LA.norm(r_k, 1) / LA.norm(r_k, 2)
                 #
                 f.k_min_sum = f.k_min_sum + k_min
-                #print k_min
+                #logging.info(k_min
                 #
                 r_k_min = f.R[:, I_ind_k_min]
                 #
@@ -270,7 +276,9 @@ def adaptiveSampling_adam(f,
                 f.I = np.delete(f.I, [I_ind_k_min])
 
         else:
-            print "NEED TO DO FILTERING STEP, BUT I HAVEN'T CODED THE functionMARG to handle this yet so breaking"
+            logging.info(
+                "NEED TO DO FILTERING STEP, BUT I HAVEN'T CODED THE functionMARG to handle this yet so breaking"
+            )
             break
 
             # newS = copy.deepcopy(S)
@@ -293,10 +301,10 @@ def adaptiveSampling_adam(f,
             # S = newS
 
     if len(S + X) <= k:
-        print('NOT ENOUGH ELEMENTS left in ground set S')
+        logging.info('NOT ENOUGH ELEMENTS left in ground set S')
         X = S + X
     #currentVal = evalByCompleting(f,S,X,k, numSamples)
-    print f.function(X), len(S), len(X)
+    logging.info(f.function(X), len(S), len(X))
 
     return X
 
@@ -307,10 +315,10 @@ if __name__ == '__main__':
     my_n_iter = 100
     parallel = True  # parallelize the inner for loop of adaptive sampling
     if parallel:
-        print("Parallelize sampling.")
+        logging.info("Parallelize sampling.")
     else:
-        print("Do not parallelize sampling.")
-        
+        logging.info("Do not parallelize sampling.")
+
     params = {
         #
         'rule_1': {
@@ -360,7 +368,7 @@ if __name__ == '__main__':
     f = SpeechDenoise(X, params)
     k = 100  # iterations in original GAD algo
     numSamples = 20
-    print('HELLO')
+    logging.info('HELLO')
     r = 10  # rounds of adaptive sampling
     opt = 1.0  # small so we don't do filtering subroutine as I haven't written that part :)
     alpha1 = 1.0
@@ -388,7 +396,7 @@ if __name__ == '__main__':
     plt.legend(('Noisy', 'Clean', 'Denoised Estimate'))
     plt.title('')
 
-    # #print 's_rec', s_rec
+    # #logging.info('s_rec', s_rec
     # librosa.output.write_wav("out_librosa_original2.wav", signal_original, fs)
     # librosa.output.write_wav("out_librosa_noisy.wav", signal*normalizing, fs)
     # librosa.output.write_wav("out_librosa_greedy"+ str(my_n_iter) +".wav", s_rec*normalizing, fs)

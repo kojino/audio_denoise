@@ -361,7 +361,7 @@ if __name__ == '__main__':
         type=float,
         help='fraction_to_drop')
 
-    parser.add_argument('--r', default=6, type=int, help='r')
+    parser.add_argument('--r', default=10, type=int, help='r')
 
     parser.add_argument('--k', default=80, type=int, help='')
 

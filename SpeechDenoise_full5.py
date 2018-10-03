@@ -6,11 +6,10 @@ from scipy import linalg
 import copy
 import random
 from math import log
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 from joblib import Parallel, delayed
 import multiprocessing
 import logging
-import argparse
 logging.basicConfig(
     format='%(asctime)s: %(message)s',
     level='INFO',
@@ -123,7 +122,7 @@ class SpeechDenoise:
         # and this one to plot solution quality over time
         self.k_min_data = []
 
-    def function(self, S, big_number=100.0):
+    def function(self, S, big_number=25.0):
         # Note: this only works for f(S); it will NOT work on any input except S. to do that, would need to find
         # the elements in the function's argument that are not in S, then iteratively add to the value we return.
         return (len(S) * big_number - self.k_min_sum)
@@ -131,7 +130,7 @@ class SpeechDenoise:
     def functionMarg_quickestimate(self,
                                    new_elements,
                                    curr_elements,
-                                   big_number=100.0):
+                                   big_number=25.0):
         new_elems = [ele for ele in new_elements if ele not in curr_elements]
         if not len(new_elems):
             return (0)
@@ -152,7 +151,7 @@ class SpeechDenoise:
 
         return (len(new_elems) * big_number - sum_of_norm_ratios)
 
-    def functionMarg(self, new_elements, curr_elements, big_number=100.0):
+    def functionMarg(self, new_elements, curr_elements, big_number=25.0):
         # This is the more correct (but slower and more complicated) functionMarg. See note in other simpler version above.
         # NOTE: IT ASSUMES THAT S IS THE CURRENT S. IT WILL BE WRONG WHEN input S is NOT the current solution!!!
         new_elems = [ele for ele in new_elements if ele not in curr_elements]
@@ -176,9 +175,12 @@ class SpeechDenoise:
         # the quality of ones in the set we sampled. Basically, that means checking for changes in k_min_sum_copy.
         #
         for I_ind_k_min in new_elems:
+            sample_avg_k_min = 0
             r_k = R_copy[:, I_ind_k_min]
             #
             k_min = LA.norm(r_k, 1) / LA.norm(r_k, 2)
+            #logging.info('k_min inside a sample is %s: ' % k_min)
+            sample_avg_k_min += k_min
             #
             marginal_k_min_sum_copy = marginal_k_min_sum_copy + k_min
             k_min_sum_copy = k_min_sum_copy + k_min
@@ -200,7 +202,11 @@ class SpeechDenoise:
 
     #
             I_copy = np.delete(I_copy, [I_ind_k_min])
-
+        #print 'sample avg k_min = ', sample_avg_k_min/np.float(len(new_elems))
+        #logging.info('marginal_k_min_sum_copy of a sample is %s: ' % marginal_k_min_sum_copy)
+        #logging.info('some sample val is %s: ' % ( - marginal_k_min_sum_copy))
+        #logging.info('big number is %s: ' % (  big_number))
+        #logging.info('len(new_elems) %s: ' % (  len(new_elems)))
         return (len(new_elems) * big_number - marginal_k_min_sum_copy)
 
 
@@ -218,16 +224,13 @@ def adaptiveSampling_adam(f,
     # This large uncommented script is not complicated enough, so here we go:
     if speed_over_accuracy:
 
-        def functionMarg_closure(new_elements, curr_elements,
-                                 big_number=100.0):
+        def functionMarg_closure(new_elements, curr_elements, big_number=25.0):
             return f.functionMarg_quickestimate(
-                new_elements, curr_elements, big_number=100.0)
+                new_elements, curr_elements, big_number=25.0)
     else:
 
-        def functionMarg_closure(new_elements, curr_elements,
-                                 big_number=100.0):
-            return f.functionMarg(
-                new_elements, curr_elements, big_number=100.0)
+        def functionMarg_closure(new_elements, curr_elements, big_number=25.0):
+            return f.functionMarg(new_elements, curr_elements, big_number=25.0)
 
     S = copy.deepcopy(f.meaningfulNodes)
     X = []
@@ -262,6 +265,9 @@ def adaptiveSampling_adam(f,
                 sample_elements()
 
         maxSampleVal = max(samplesVal)
+        #print 'max sample val / len', maxSampleVal/np.float(k/r), 'avg sample val', np.mean(samplesVal)/np.float(k/r)
+        #print 'max sample val / len', maxSampleVal, 'avg sample val', np.mean(samplesVal)
+
         bestSample = samples[samplesVal.index(maxSampleVal)]
 
         if maxSampleVal >= (opt - currentVal) / (alpha1 * float(r)):
@@ -278,6 +284,8 @@ def adaptiveSampling_adam(f,
                 #
                 #k_min = tmp[ind_k_min]
                 k_min = LA.norm(r_k_min, 1) / LA.norm(r_k_min, 2)
+                #print 'k_min added to soln', k_min
+                #                print 'k_min in best', k_min
                 f.k_min_data.append(k_min)  # This is just for logging purposes
                 #
                 f.k_min_sum = f.k_min_sum + k_min
@@ -342,7 +350,6 @@ def adaptiveSampling_adam(f,
 
     #logging.info(f.function(X), len(S), len(X))
     return X
-
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()

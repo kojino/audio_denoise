@@ -7,7 +7,7 @@
 #SBATCH -p shared
 #SBATCH --account=ysinger_group
 
-python SpeechDenoise_full4.py \
+python SpeechDenoise_full5.py \
 --fraction_to_drop=${1} \
 --k=${2} \
 --r=${3} \

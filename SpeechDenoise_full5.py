@@ -394,7 +394,8 @@ if __name__ == '__main__':
     num_cores = multiprocessing.cpu_count()
     logging.info('num_cores:')
     logging.info(num_cores)
-
+    print(fraction_to_drop)
+    print("dataset/adaptive_%s_%s_%d_%d.wav" % (audio, str(fraction_to_drop), k, r))
     params = {
         'rule_1': {
             'n_iter': my_n_iter

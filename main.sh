@@ -5,7 +5,6 @@
 #SBATCH --mem 999
 #SBATCH -J adaptive
 #SBATCH -p shared
-#SBATCH --account=ysinger_group
 
 ks=(60 80 100 150 200 250 300 400 500)
 rs=(4 6 8 10 12)

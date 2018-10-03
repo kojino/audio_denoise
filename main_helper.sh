@@ -6,7 +6,6 @@
 #SBATCH -n 12
 #SBATCH -J adaptive
 #SBATCH -p shared
-#SBATCH --account=ysinger_group
 
 python SpeechDenoise_full5.py \
 --fraction_to_drop=${1} \

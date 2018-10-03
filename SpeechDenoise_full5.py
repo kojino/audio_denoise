@@ -394,8 +394,7 @@ if __name__ == '__main__':
     num_cores = multiprocessing.cpu_count()
     logging.info('num_cores:')
     logging.info(num_cores)
-    print(fraction_to_drop)
-    print("dataset/adaptive_%s_%s_%d_%d.wav" % (audio, str(fraction_to_drop), k, r))
+
     params = {
         'rule_1': {
             'n_iter': my_n_iter
@@ -510,5 +509,5 @@ if __name__ == '__main__':
     librosa.output.write_wav("dataset/noisy_%d.wav" % fraction_to_drop, signal,
                              fs)
     librosa.output.write_wav(
-        "dataset/adaptive_%s_%d_%d_%d.wav" % (audio, fraction_to_drop, k, r),
-        s_rec / np.max(s_rec), fs)
+        "dataset/adaptive_%s_%s_%d_%d.wav" % (audio, str(fraction_to_drop), k,
+                                              r), s_rec / np.max(s_rec), fs)

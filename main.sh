@@ -2,7 +2,7 @@
 #SBATCH -o master.%j.txt
 #SBATCH -e master.%j.err
 #SBATCH -t 05:01:00
-#SBATCH --mem 1000
+#SBATCH --mem 999
 #SBATCH -J adaptive
 #SBATCH -p shared
 #SBATCH --account=ysinger_group

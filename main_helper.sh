@@ -3,6 +3,7 @@
 #SBATCH -e val.%j.err
 #SBATCH -t 5-05:01:00
 #SBATCH --mem 999
+#SBATCH -n 12
 #SBATCH -J adaptive
 #SBATCH -p shared
 #SBATCH --account=ysinger_group

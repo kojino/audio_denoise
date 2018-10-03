@@ -381,7 +381,7 @@ if __name__ == '__main__':
     fraction_to_drop = args.fraction_to_drop
     k = args.k  # iterations in original GAD algo
     #numSamples = 24
-    numSamples = 108
+    numSamples = 36 * 4
     r = args.r  # rounds of adaptive sampling
     #r = k+1-1
     opt = 1.0  # small so we don't do filtering subroutine as I haven't written that part :)

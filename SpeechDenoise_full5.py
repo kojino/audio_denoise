@@ -352,6 +352,7 @@ def adaptiveSampling_adam(f,
     #logging.info(f.function(X), len(S), len(X))
     return X
 
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
@@ -368,7 +369,7 @@ if __name__ == '__main__':
     parser.add_argument('--audio', default='alexa', type=str, help='')
 
     args = parser.parse_args()
-    print(args)
+    logging.info(args)
     ### Params ###
     audio = args.audio
     L = 512  # frame length
@@ -505,7 +506,8 @@ if __name__ == '__main__':
 
     # Output the WAV files. Note we also re-make the original, as encoding degrades (so it's only fair)
     # librosa.output.write_wav("original.wav", signal_original, fs)
-    librosa.output.write_wav("dataset/noisy_%d.wav" % fraction_to_drop, signal, fs)
+    librosa.output.write_wav("dataset/noisy_%d.wav" % fraction_to_drop, signal,
+                             fs)
     librosa.output.write_wav(
         "dataset/adaptive_%s_%d_%d_%d.wav" % (audio, fraction_to_drop, k, r),
         s_rec / np.max(s_rec), fs)

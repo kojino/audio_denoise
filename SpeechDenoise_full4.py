@@ -6,7 +6,7 @@ from scipy import linalg
 import copy
 import random
 from math import log
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 from joblib import Parallel, delayed
 import multiprocessing
 import logging

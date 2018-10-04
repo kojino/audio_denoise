@@ -14,7 +14,8 @@ import argparse
 logging.basicConfig(
     format='%(asctime)s: %(message)s',
     level='INFO',
-    datefmt='%m/%d/%Y %I:%M:%S %p')
+    datefmt='%m/%d/%Y %I:%M:%S %p',
+    filename='adaptive.log', filemode='w')
 
 
 def sampleS(S, k):

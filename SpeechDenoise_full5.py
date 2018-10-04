@@ -13,7 +13,6 @@ import logging
 import argparse
 
 
-
 def sampleS(S, k):
     sample = []
     if len(S) <= k:
@@ -246,7 +245,7 @@ def adaptiveSampling_adam(f,
 
         # PARALLELIZE THIS LOOP it is emb. parallel
 
-        def sample_elements():
+        def sample_elements(samples, samplesVal):
             #logging.info(len(S), 'is len(S)'
             sample = sampleS(S, k / r)
             #logging.info(len(S), 'is len(S);', k/r, 'is k/r', k,'is k', r, 'is r', len(sample), 'is len sample'
@@ -255,9 +254,18 @@ def adaptiveSampling_adam(f,
             samples.append(sample)
 
         if parallel:
-            Parallel(n_jobs=num_cores)(
-                delayed(sample_elements) for i in range(numSamples))
-
+            manager = multiprocessing.Manager()
+            samples = manager.list()
+            samplesVal = manager.list()
+            jobs = []
+            for i in range(numSamples):
+                p = multiprocessing.Process(target=sample_elements, args=(samples, samplesVal))
+                jobs.append(p)
+                p.start()
+            for proc in jobs:
+                proc.join()
+            samples = list(samples)
+            samplesVal = list(samplesVal)
         else:
             for i in range(numSamples):
                 sample_elements()
@@ -365,7 +373,7 @@ if __name__ == '__main__':
 
     parser.add_argument('--audio', default='alexa', type=str, help='')
 
-    parser.add_argument('--num_samples', default=36*4, type=int, help='r')
+    parser.add_argument('--num_samples', default=36 * 4, type=int, help='r')
 
     parser.add_argument('--speed_over_accuracy', default=1, type=int, help='')
 
@@ -375,7 +383,9 @@ if __name__ == '__main__':
         format='%(asctime)s: %(message)s',
         level='INFO',
         datefmt='%m/%d/%Y %I:%M:%S %p',
-        filename='adaptive_%d_%d.log' % (args.num_samples, args.speed_over_accuracy), filemode='w')
+        filename='adaptive_%d_%d.log' % (args.num_samples,
+                                         args.speed_over_accuracy),
+        filemode='w')
 
     logging.info(args)
     ### Params ###
@@ -462,7 +472,7 @@ if __name__ == '__main__':
     logging.info("START")
     solution_elements = adaptiveSampling_adam(f, k, numSamples, r, opt, alpha1,
                                               alpha2, compute_rmse,
-                                              speed_over_accuracy)
+                                              speed_over_accuracy, parallel)
 
     # Put the output back into the form of the original song
     D_stack = np.vstack(f.D).T
@@ -515,8 +525,9 @@ if __name__ == '__main__':
 
     # Output the WAV files. Note we also re-make the original, as encoding degrades (so it's only fair)
     librosa.output.write_wav("original.wav", signal_original, fs)
-    librosa.output.write_wav("dataset/noisy_%s.wav" % str(fraction_to_drop), signal,
-                             fs)
+    librosa.output.write_wav("dataset/noisy_%s.wav" % str(fraction_to_drop),
+                             signal, fs)
     librosa.output.write_wav(
-        "dataset/adaptive_%s_%s_%d_%d_%d_%d.wav" % (audio, str(fraction_to_drop), k,
-                                              r, numSamples, speed_over_accuracy), s_rec / np.max(s_rec), fs)
+        "dataset/adaptive_%s_%s_%d_%d_%d_%d.wav" %
+        (audio, str(fraction_to_drop), k, r, numSamples, speed_over_accuracy),
+        s_rec / np.max(s_rec), fs)

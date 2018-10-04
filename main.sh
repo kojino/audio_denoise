@@ -9,7 +9,7 @@
 ks=(60)
 rs=(12)
 fraction_to_drops=(0.50)
-audios=('billy' 'call')
+audios=('call')
 num_sampless=(144)
 speed_over_accuracys=(1)
 

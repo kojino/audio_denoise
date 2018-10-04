@@ -1,7 +1,0 @@
-10/04/2018 03:25:11 PM: Namespace(audio='billy', fraction_to_drop=0.5, k=60, num_samples=72, r=12, speed_over_accuracy=1)
-10/04/2018 03:25:11 PM: num_cores:
-10/04/2018 03:25:11 PM: 4
-10/04/2018 03:25:11 PM: Parallelize sampling.
-10/04/2018 03:25:11 PM: The signal length is 983564: 
-10/04/2018 03:25:11 PM: The number of frames 'K' is 1921: 
-10/04/2018 03:25:11 PM: The length of each frame 'L' is 512: 

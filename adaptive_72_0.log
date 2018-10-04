@@ -1,7 +1,0 @@
-10/04/2018 01:31:31 AM: Namespace(audio='alexa', fraction_to_drop=0.5, k=60, num_samples=72, r=12, speed_over_accuracy=0)
-10/04/2018 01:31:31 AM: num_cores:
-10/04/2018 01:31:31 AM: 4
-10/04/2018 01:31:31 AM: Parallelize sampling.
-10/04/2018 01:31:31 AM: The signal length is 223595: 
-10/04/2018 01:31:31 AM: The number of frames 'K' is 436: 
-10/04/2018 01:31:31 AM: The length of each frame 'L' is 512: 

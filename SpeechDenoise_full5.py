@@ -259,7 +259,8 @@ def adaptiveSampling_adam(f,
             samplesVal = manager.list()
             jobs = []
             for i in range(numSamples):
-                p = multiprocessing.Process(target=sample_elements, args=(samples, samplesVal))
+                p = multiprocessing.Process(
+                    target=sample_elements, args=(samples, samplesVal))
                 jobs.append(p)
                 p.start()
             for proc in jobs:
@@ -431,7 +432,7 @@ if __name__ == '__main__':
     #signal, fs = librosa.core.load('./dataset/source2.wav', 44100)
     #signal2, fs2 = sf.read('./dataset/source1.wav', samplerate=fs)
     # signal, fs = librosa.core.load('./dataset/alexa_demo.m4a', 44100)
-    signal, fs = librosa.core.load('./dataset/' + audio + '.wav', 44100)
+    signal, fs = librosa.core.load('./dataset/' + audio + '.m4a', 44100)
     #
     signal_original = signal.copy()
     # # Normalize the signal

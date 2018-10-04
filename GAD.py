@@ -12,6 +12,8 @@ logging.basicConfig(
     format='%(asctime)s: %(message)s',
     level='INFO',
     datefmt='%m/%d/%Y %I:%M:%S %p')
+
+
 def buffer(signal, L, M):
     if M >= L:
         print('Error: Overlapping windows cannot be larger than frame length!')
@@ -175,7 +177,7 @@ if __name__ == '__main__':
 
     # new matrix LxK
     X = np.vstack(X_tmp).T.astype('float')
-
+    print(X.shape)
     # ???
     # if X.shape[1] < L:
     #     print 'The number of frames %s has to be greater than its own length %s'%(X.shape[1],X.shape[0])

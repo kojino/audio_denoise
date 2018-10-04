@@ -10,8 +10,8 @@ ks=(60)
 rs=(12)
 fraction_to_drops=(0.50)
 audios=('billy' 'call')
-num_sampless=(72 144)
-speed_over_accuracys=(1 0)
+num_sampless=(144)
+speed_over_accuracys=(1)
 
 for k in ${ks[@]}
 do

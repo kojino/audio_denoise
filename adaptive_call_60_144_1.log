@@ -1,0 +1,69 @@
+10/04/2018 08:36:02 PM: Namespace(audio='call', fraction_to_drop=0.5, k=60, num_samples=144, r=12, speed_over_accuracy=1)
+10/04/2018 08:36:02 PM: num_cores:
+10/04/2018 08:36:02 PM: 72
+10/04/2018 08:36:02 PM: Parallelize sampling.
+10/04/2018 08:36:02 PM: The signal length is 530160: 
+10/04/2018 08:36:02 PM: The number of frames 'K' is 1035: 
+10/04/2018 08:36:02 PM: The length of each frame 'L' is 512: 
+10/04/2018 08:36:03 PM: START
+10/04/2018 08:36:03 PM: [0.0, 'ground set remaining:', 44139, 'size of current solution:', 0]
+10/04/2018 08:36:06 PM: [53.44550347585229, 'ground set remaining:', 44134, 'size of current solution:', 5]
+10/04/2018 08:36:09 PM: [103.36373909506887, 'ground set remaining:', 44129, 'size of current solution:', 10]
+10/04/2018 08:36:12 PM: [152.59142824064708, 'ground set remaining:', 44124, 'size of current solution:', 15]
+10/04/2018 08:36:15 PM: [197.7914494867431, 'ground set remaining:', 44119, 'size of current solution:', 20]
+10/04/2018 08:36:18 PM: [242.99365021982067, 'ground set remaining:', 44114, 'size of current solution:', 25]
+10/04/2018 08:36:21 PM: [288.1071804604137, 'ground set remaining:', 44109, 'size of current solution:', 30]
+10/04/2018 08:36:24 PM: [330.81864283469656, 'ground set remaining:', 44104, 'size of current solution:', 35]
+10/04/2018 08:36:27 PM: [374.90236981998794, 'ground set remaining:', 44099, 'size of current solution:', 40]
+10/04/2018 08:36:31 PM: [417.16408185561545, 'ground set remaining:', 44094, 'size of current solution:', 45]
+10/04/2018 08:36:34 PM: [457.88943194415936, 'ground set remaining:', 44089, 'size of current solution:', 50]
+10/04/2018 08:36:37 PM: [499.07406423892417, 'ground set remaining:', 44084, 'size of current solution:', 55]
+10/04/2018 08:36:40 PM: The signal length is 530160: 
+10/04/2018 08:36:40 PM: The number of frames 'K' is 1035: 
+10/04/2018 08:36:40 PM: The length of each frame 'L' is 512: 
+10/04/2018 08:36:41 PM: START
+10/04/2018 08:36:41 PM: [0.0, 'ground set remaining:', 44139, 'size of current solution:', 0]
+10/04/2018 08:36:45 PM: [55.08327831323439, 'ground set remaining:', 44134, 'size of current solution:', 5]
+10/04/2018 08:36:49 PM: [103.71276063014989, 'ground set remaining:', 44129, 'size of current solution:', 10]
+10/04/2018 08:36:53 PM: [152.0482088185937, 'ground set remaining:', 44124, 'size of current solution:', 15]
+10/04/2018 08:36:56 PM: [198.70137595546964, 'ground set remaining:', 44119, 'size of current solution:', 20]
+10/04/2018 08:37:00 PM: [243.08844177652122, 'ground set remaining:', 44114, 'size of current solution:', 25]
+10/04/2018 08:37:04 PM: [289.05035025374724, 'ground set remaining:', 44109, 'size of current solution:', 30]
+10/04/2018 08:37:08 PM: [331.79504817011, 'ground set remaining:', 44104, 'size of current solution:', 35]
+10/04/2018 08:37:12 PM: [373.3594604503096, 'ground set remaining:', 44099, 'size of current solution:', 40]
+10/04/2018 08:37:16 PM: [415.52172319084457, 'ground set remaining:', 44094, 'size of current solution:', 45]
+10/04/2018 08:37:19 PM: [456.78509767342894, 'ground set remaining:', 44089, 'size of current solution:', 50]
+10/04/2018 08:37:23 PM: [498.1489167102661, 'ground set remaining:', 44084, 'size of current solution:', 55]
+10/04/2018 08:37:28 PM: The signal length is 530160: 
+10/04/2018 08:37:28 PM: The number of frames 'K' is 1035: 
+10/04/2018 08:37:28 PM: The length of each frame 'L' is 512: 
+10/04/2018 08:37:29 PM: START
+10/04/2018 08:37:29 PM: [0.0, 'ground set remaining:', 44139, 'size of current solution:', 0]
+10/04/2018 08:37:33 PM: [50.98676484640278, 'ground set remaining:', 44134, 'size of current solution:', 5]
+10/04/2018 08:37:37 PM: [98.07790088197774, 'ground set remaining:', 44129, 'size of current solution:', 10]
+10/04/2018 08:37:41 PM: [144.48255449203793, 'ground set remaining:', 44124, 'size of current solution:', 15]
+10/04/2018 08:37:44 PM: [188.8907844768063, 'ground set remaining:', 44119, 'size of current solution:', 20]
+10/04/2018 08:37:48 PM: [233.45531164481565, 'ground set remaining:', 44114, 'size of current solution:', 25]
+10/04/2018 08:37:53 PM: [277.1739142963476, 'ground set remaining:', 44109, 'size of current solution:', 30]
+10/04/2018 08:37:57 PM: [319.7018330951738, 'ground set remaining:', 44104, 'size of current solution:', 35]
+10/04/2018 08:38:01 PM: [361.1330614648117, 'ground set remaining:', 44099, 'size of current solution:', 40]
+10/04/2018 08:38:05 PM: [402.75657882447035, 'ground set remaining:', 44094, 'size of current solution:', 45]
+10/04/2018 08:38:09 PM: [443.04192363482196, 'ground set remaining:', 44089, 'size of current solution:', 50]
+10/04/2018 08:38:13 PM: [483.63611035215797, 'ground set remaining:', 44084, 'size of current solution:', 55]
+10/04/2018 08:38:18 PM: The signal length is 530160: 
+10/04/2018 08:38:18 PM: The number of frames 'K' is 1035: 
+10/04/2018 08:38:18 PM: The length of each frame 'L' is 512: 
+10/04/2018 08:38:19 PM: START
+10/04/2018 08:38:19 PM: [0.0, 'ground set remaining:', 44139, 'size of current solution:', 0]
+10/04/2018 08:38:23 PM: [53.75336248616813, 'ground set remaining:', 44134, 'size of current solution:', 5]
+10/04/2018 08:38:28 PM: [102.68223892779136, 'ground set remaining:', 44129, 'size of current solution:', 10]
+10/04/2018 08:38:32 PM: [148.55071510896286, 'ground set remaining:', 44124, 'size of current solution:', 15]
+10/04/2018 08:38:36 PM: [194.55951339156536, 'ground set remaining:', 44119, 'size of current solution:', 20]
+10/04/2018 08:38:40 PM: [238.0682841784818, 'ground set remaining:', 44114, 'size of current solution:', 25]
+10/04/2018 08:38:45 PM: [282.06934607918726, 'ground set remaining:', 44109, 'size of current solution:', 30]
+10/04/2018 08:38:49 PM: [324.24164024604363, 'ground set remaining:', 44104, 'size of current solution:', 35]
+10/04/2018 08:38:53 PM: [365.42513697051436, 'ground set remaining:', 44099, 'size of current solution:', 40]
+10/04/2018 08:38:57 PM: [406.5329651509271, 'ground set remaining:', 44094, 'size of current solution:', 45]
+10/04/2018 08:39:02 PM: [446.5503963098646, 'ground set remaining:', 44089, 'size of current solution:', 50]
+10/04/2018 08:39:05 PM: [486.823116065317, 'ground set remaining:', 44084, 'size of current solution:', 55]
+10/04/2018 08:39:10 PM: STOP

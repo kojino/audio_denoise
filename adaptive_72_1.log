@@ -1,0 +1,16 @@
+10/04/2018 01:19:29 AM: Namespace(audio='alexa', fraction_to_drop=0.5, k=60, num_samples=72, r=12, speed_over_accuracy=1)
+10/04/2018 01:19:29 AM: num_cores:
+10/04/2018 01:19:29 AM: 4
+10/04/2018 01:19:29 AM: Parallelize sampling.
+10/04/2018 01:19:29 AM: The signal length is 223595: 
+10/04/2018 01:19:29 AM: The number of frames 'K' is 436: 
+10/04/2018 01:19:29 AM: The length of each frame 'L' is 512: 
+10/04/2018 01:19:29 AM: START
+10/04/2018 01:19:29 AM: [0.0, 'ground set remaining:', 18592, 'size of current solution:', 0]
+10/04/2018 01:19:34 AM: [53.77914394390288, 'ground set remaining:', 18587, 'size of current solution:', 5]
+10/04/2018 01:19:37 AM: [103.3535224158187, 'ground set remaining:', 18582, 'size of current solution:', 10]
+10/04/2018 01:19:41 AM: [150.8578229145274, 'ground set remaining:', 18577, 'size of current solution:', 15]
+10/04/2018 01:19:44 AM: [195.73383572241227, 'ground set remaining:', 18572, 'size of current solution:', 20]
+10/04/2018 01:19:47 AM: [237.4730215050459, 'ground set remaining:', 18567, 'size of current solution:', 25]
+10/04/2018 01:19:51 AM: [280.5248015536808, 'ground set remaining:', 18562, 'size of current solution:', 30]
+10/04/2018 01:19:54 AM: [322.72080007944794, 'ground set remaining:', 18557, 'size of current solution:', 35]

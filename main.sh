@@ -19,12 +19,13 @@ for r in ${rs[@]}
 do
 for audio in ${audios[@]}
 do
+for speed_over_accuracy in ${speed_over_accuracys[@]}
+do
 for fraction_to_drop in ${fraction_to_drops[@]}
 do
 for num_samples in ${num_sampless[@]}
 do
-for speed_over_accuracy in ${speed_over_accuracys[@]}
-do
+
 ./main_helper.sh \
 $fraction_to_drop \
 $k \

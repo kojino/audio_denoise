@@ -384,8 +384,8 @@ if __name__ == '__main__':
         format='%(asctime)s: %(message)s',
         level='INFO',
         datefmt='%m/%d/%Y %I:%M:%S %p',
-        filename='adaptive_%d_%d.log' % (args.num_samples,
-                                         args.speed_over_accuracy),
+        filename='adaptive_%s_%d_%d_%d.log' %
+        (args.audio, args.k, args.num_samples, args.speed_over_accuracy),
         filemode='w')
 
     logging.info(args)
@@ -526,8 +526,9 @@ if __name__ == '__main__':
 
     # Output the WAV files. Note we also re-make the original, as encoding degrades (so it's only fair)
     librosa.output.write_wav("original.wav", signal_original, fs)
-    librosa.output.write_wav("dataset/noisy_%s.wav" % str(fraction_to_drop),
-                             signal, fs)
+    librosa.output.write_wav(
+        "dataset/noisy_%s_%s.wav" % (args.audio, str(fraction_to_drop)),
+        signal, fs)
     librosa.output.write_wav(
         "dataset/adaptive_%s_%s_%d_%d_%d_%d.wav" %
         (audio, str(fraction_to_drop), k, r, numSamples, speed_over_accuracy),

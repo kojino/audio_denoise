@@ -6,11 +6,11 @@
 #SBATCH -J adaptive
 #SBATCH -p shared
 
-ks=(80)
-rs=(12)
+ks=(60)
+rs=(30)
 fraction_to_drops=(0.50)
 audios=('call' 'billy')
-num_sampless=(144)
+num_sampless=(216)
 speed_over_accuracys=(1)
 
 for k in ${ks[@]}

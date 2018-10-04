@@ -7,10 +7,10 @@
 #SBATCH -p shared
 
 ks=(60)
-rs=(12)
+rs=(60)
 fraction_to_drops=(0.50)
 audios=('call' 'billy')
-num_sampless=(144)
+num_sampless=(360)
 speed_over_accuracys=(1)
 
 for k in ${ks[@]}

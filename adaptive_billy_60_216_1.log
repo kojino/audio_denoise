@@ -1,0 +1,39 @@
+10/04/2018 08:26:18 PM: Namespace(audio='billy', fraction_to_drop=0.5, k=60, num_samples=216, r=30, speed_over_accuracy=1)
+10/04/2018 08:26:18 PM: num_cores:
+10/04/2018 08:26:18 PM: 72
+10/04/2018 08:26:18 PM: Parallelize sampling.
+10/04/2018 08:26:19 PM: The signal length is 984000: 
+10/04/2018 08:26:19 PM: The number of frames 'K' is 1921: 
+10/04/2018 08:26:19 PM: The length of each frame 'L' is 512: 
+10/04/2018 08:26:20 PM: START
+10/04/2018 08:26:20 PM: [0.0, 'ground set remaining:', 81959, 'size of current solution:', 0]
+10/04/2018 08:26:26 PM: [23.493623149686634, 'ground set remaining:', 81957, 'size of current solution:', 2]
+10/04/2018 08:26:31 PM: [46.12913264224973, 'ground set remaining:', 81955, 'size of current solution:', 4]
+10/04/2018 08:26:37 PM: [67.41936208292145, 'ground set remaining:', 81953, 'size of current solution:', 6]
+10/04/2018 08:26:42 PM: [95.25010195410063, 'ground set remaining:', 81951, 'size of current solution:', 8]
+10/04/2018 08:26:48 PM: [115.8318999849869, 'ground set remaining:', 81949, 'size of current solution:', 10]
+10/04/2018 08:26:53 PM: [135.6074409752514, 'ground set remaining:', 81947, 'size of current solution:', 12]
+10/04/2018 08:26:59 PM: [155.2393382528781, 'ground set remaining:', 81945, 'size of current solution:', 14]
+10/04/2018 08:27:04 PM: [175.43131466420832, 'ground set remaining:', 81943, 'size of current solution:', 16]
+10/04/2018 08:27:09 PM: [195.57939109629208, 'ground set remaining:', 81941, 'size of current solution:', 18]
+10/04/2018 08:27:15 PM: [215.36402097409302, 'ground set remaining:', 81939, 'size of current solution:', 20]
+10/04/2018 08:27:20 PM: [233.72130081374496, 'ground set remaining:', 81937, 'size of current solution:', 22]
+10/04/2018 08:27:25 PM: [251.80825777288732, 'ground set remaining:', 81935, 'size of current solution:', 24]
+10/04/2018 08:27:30 PM: [270.06485998762895, 'ground set remaining:', 81933, 'size of current solution:', 26]
+10/04/2018 08:27:35 PM: [287.4855085282499, 'ground set remaining:', 81931, 'size of current solution:', 28]
+10/04/2018 08:27:40 PM: [304.8835334110941, 'ground set remaining:', 81929, 'size of current solution:', 30]
+10/04/2018 08:27:45 PM: [323.86707951369016, 'ground set remaining:', 81927, 'size of current solution:', 32]
+10/04/2018 08:27:51 PM: [341.5656012478709, 'ground set remaining:', 81925, 'size of current solution:', 34]
+10/04/2018 08:27:56 PM: [359.2305458516232, 'ground set remaining:', 81923, 'size of current solution:', 36]
+10/04/2018 08:28:02 PM: [377.0135481769315, 'ground set remaining:', 81921, 'size of current solution:', 38]
+10/04/2018 08:28:08 PM: [394.2531102835327, 'ground set remaining:', 81919, 'size of current solution:', 40]
+10/04/2018 08:28:14 PM: [411.1079781982115, 'ground set remaining:', 81917, 'size of current solution:', 42]
+10/04/2018 08:28:19 PM: [428.61111089523274, 'ground set remaining:', 81915, 'size of current solution:', 44]
+10/04/2018 08:28:24 PM: [445.8426760417359, 'ground set remaining:', 81913, 'size of current solution:', 46]
+10/04/2018 08:28:30 PM: [462.4440174431004, 'ground set remaining:', 81911, 'size of current solution:', 48]
+10/04/2018 08:28:35 PM: [479.1592362568309, 'ground set remaining:', 81909, 'size of current solution:', 50]
+10/04/2018 08:28:40 PM: [496.92251044893237, 'ground set remaining:', 81907, 'size of current solution:', 52]
+10/04/2018 08:28:46 PM: [512.832030512445, 'ground set remaining:', 81905, 'size of current solution:', 54]
+10/04/2018 08:28:51 PM: [529.8298488993421, 'ground set remaining:', 81903, 'size of current solution:', 56]
+10/04/2018 08:28:56 PM: [546.0090039034069, 'ground set remaining:', 81901, 'size of current solution:', 58]
+10/04/2018 08:29:03 PM: STOP

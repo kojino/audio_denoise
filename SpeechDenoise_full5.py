@@ -431,10 +431,12 @@ if __name__ == '__main__':
     #
     #signal, fs = librosa.core.load('./dataset/source2.wav', 44100)
     #signal2, fs2 = sf.read('./dataset/source1.wav', samplerate=fs)
-    # signal, fs = librosa.core.load('./dataset/alexa_demo.m4a', 44100)
-    signal, fs = librosa.core.load('./dataset/' + audio + '.m4a', 44100)
+    signal, fs = librosa.core.load('./dataset/alexa_demo.m4a', 44100)
+    # signal, fs = librosa.core.load('./dataset/' + audio + '.m4a', 44100)
     #
     signal_original = signal.copy()
+    signal_segments = np.array_split(signal, 4)
+    signal_reconstructed = []
     # # Normalize the signal
     # normalizing = linalg.norm(signal)
     # signal /= normalizing
@@ -447,42 +449,49 @@ if __name__ == '__main__':
     # signal = signal+noise
     #
     # Signal drop noise:
-    n_to_drop = int(fraction_to_drop * signal.shape[0])
-    drop_idx = np.random.choice(
-        range(signal.shape[0]), n_to_drop, replace=True)
-    signal[drop_idx] = 0
+    for ii in range(len(signal_segments)):
+        signal = signal_segments[ii]
+        n_to_drop = int(fraction_to_drop * signal.shape[0])
+        drop_idx = np.random.choice(
+            range(signal.shape[0]), n_to_drop, replace=True)
+        signal[drop_idx] = 0
 
-    # plt.close('all')
-    # plt.figure()
-    # plt.plot(signal, 'k', alpha=0.3)
-    # plt.plot(signal_original, 'r:', alpha=0.3, linewidth=1.0)
-    # plt.legend(('Noisy', 'Clean'))
-    # plt.title('')
-    # plt.show()
+        # plt.close('all')
+        # plt.figure()
+        # plt.plot(signal, 'k', alpha=0.3)
+        # plt.plot(signal_original, 'r:', alpha=0.3, linewidth=1.0)
+        # plt.legend(('Noisy', 'Clean'))
+        # plt.title('')
+        # plt.show()
 
-    X_tmp = buffer(signal, L, M)
-    X = np.vstack(X_tmp).T.astype('float')
+        X_tmp = buffer(signal, L, M)
+        X = np.vstack(X_tmp).T.astype('float')
 
-    # Initialize class with the buffered song X and the objective function
+        # Initialize class with the buffered song X and the objective function
 
-    if compute_rmse:
-        # FOR PLOT GENERATION USE:
-        f = SpeechDenoise(X, params, M, signal)
-    else:
-        f = SpeechDenoise(X, params, M)
-    logging.info("START")
-    solution_elements = adaptiveSampling_adam(f, k, numSamples, r, opt, alpha1,
-                                              alpha2, compute_rmse,
-                                              speed_over_accuracy, parallel)
+        if compute_rmse:
+            # FOR PLOT GENERATION USE:
+            f = SpeechDenoise(X, params, M, signal)
+        else:
+            f = SpeechDenoise(X, params, M)
+        logging.info("START")
+        solution_elements = adaptiveSampling_adam(
+            f, k, numSamples, r, opt, alpha1, alpha2, compute_rmse,
+            speed_over_accuracy, parallel)
 
-    # Put the output back into the form of the original song
-    D_stack = np.vstack(f.D).T
-    X_t = np.dot(np.dot(D_stack, D_stack.T), X)
-    s_rec = unbuffer(X_t, L - M)
-
+        # Put the output back into the form of the original song
+        D_stack = np.vstack(f.D).T
+        X_t = np.dot(np.dot(D_stack, D_stack.T), X)
+        s_rec = unbuffer(X_t, L - M)
+        s_rec = s_rec[0:len(signal)]
+        signal_reconstructed.append(s_rec)
+    signal_reconstructed_unnest = [item for sublist in signal_reconstructed for item in sublist]
+    print 'LEN STITCHED BACK TOGETHER =', len(signal_reconstructed_unnest)
+    print 'LEN ORIGINAL WAS =', len(signal_original)
+    s_rec = signal_reconstructed_unnest # so the rest of the code will work
     #print f.rmse
     logging.info("STOP")
-
+    
     #######################################
     # THIS IS WHERE THE TIMER SHOULD STOP #
     #######################################

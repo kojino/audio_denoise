@@ -7,7 +7,7 @@
 #SBATCH -p shared
 
 ks=(60)
-rs=(1)
+rs=(12)
 fraction_to_drops=(0.50)
 audios=('alexa')
 num_sampless=(72 144)

@@ -11,4 +11,6 @@ python SpeechDenoise_full5.py \
 --fraction_to_drop=${1} \
 --k=${2} \
 --r=${3} \
---audio=${4}
+--audio=${4} \
+--num_samples=${5} \
+--speed_over_accuracy=${6}

@@ -368,10 +368,6 @@ if __name__ == '__main__':
 
     parser.add_argument('--audio', default='alexa', type=str, help='')
 
-    parser.add_argument('--num_samples', default=36*4, type=int, help='r')
-
-    parser.add_argument('--speed_over_accuracy', default=1, type=int, help='')
-
     args = parser.parse_args()
     logging.info(args)
     ### Params ###
@@ -385,13 +381,13 @@ if __name__ == '__main__':
     fraction_to_drop = args.fraction_to_drop
     k = args.k  # iterations in original GAD algo
     #numSamples = 24
-    numSamples = args.num_samples
+    numSamples = 36 * 4
     r = args.r  # rounds of adaptive sampling
     #r = k+1-1
     opt = 1.0  # small so we don't do filtering subroutine as I haven't written that part :)
     alpha1 = 1.0
     alpha2 = 1.0
-    speed_over_accuracy = args.speed_over_accuracy  # IF true, we assume the fn is modular within rounds and speed things up a lot!
+    speed_over_accuracy = True  # IF true, we assume the fn is modular within rounds and speed things up a lot!
     # We do that by using functionMarg instead of functionMarg_better. May sacrifice some performance, though.
     #############
 
@@ -455,7 +451,7 @@ if __name__ == '__main__':
         f = SpeechDenoise(X, params, M, signal)
     else:
         f = SpeechDenoise(X, params, M)
-    logging.info("START")
+
     solution_elements = adaptiveSampling_adam(f, k, numSamples, r, opt, alpha1,
                                               alpha2, compute_rmse,
                                               speed_over_accuracy)
@@ -466,53 +462,52 @@ if __name__ == '__main__':
     s_rec = unbuffer(X_t, L - M)
 
     #print f.rmse
-    logging.info("STOP")
 
     #######################################
     # THIS IS WHERE THE TIMER SHOULD STOP #
     #######################################
 
-    # # PLOTS
-    # if compute_rmse:
-    #     plt.close('all')
-    #     plt.figure()
-    #     plt.plot(f.rmse, 'r:', alpha=0.8)
-    #     plt.title('RMSE: Original track (without noise) vs. Denoised track')
-    #     plt.show()
+    # PLOTS
+    if compute_rmse:
+        plt.close('all')
+        plt.figure()
+        plt.plot(f.rmse, 'r:', alpha=0.8)
+        plt.title('RMSE: Original track (without noise) vs. Denoised track')
+        plt.show()
 
-    # avg_sparsity_of_samples_added_per_round = []
-    # for rd in range(r):
-    #     idx_left = rd * r
-    #     idx_right = rd * r + r
-    #     avg_sparsity_of_samples_added_per_round.append(
-    #         np.mean(f.k_min_data[idx_left:idx_right]))
-    # plt.close('all')
-    # plt.figure()
-    # plt.plot(avg_sparsity_of_samples_added_per_round, 'b', alpha=0.8)
-    # plt.title('avg. sparsity values of elements per round')
-    # plt.show()
+    avg_sparsity_of_samples_added_per_round = []
+    for rd in range(r):
+        idx_left = rd * r
+        idx_right = rd * r + r
+        avg_sparsity_of_samples_added_per_round.append(
+            np.mean(f.k_min_data[idx_left:idx_right]))
+    plt.close('all')
+    plt.figure()
+    plt.plot(avg_sparsity_of_samples_added_per_round, 'b', alpha=0.8)
+    plt.title('avg. sparsity values of elements per round')
+    plt.show()
 
-    # plt.close('all')
-    # plt.figure()
-    # plt.plot(signal, 'k', alpha=0.3)
-    # plt.plot(signal_original, 'r:', alpha=0.3, linewidth=1.0)
-    # plt.plot(s_rec / max(s_rec), 'b', alpha=0.3, linewidth=1.0)
-    # plt.legend(('Noisy', 'Clean', 'Denoised Estimate'))
-    # plt.title('')
-    # plt.show()
+    plt.close('all')
+    plt.figure()
+    plt.plot(signal, 'k', alpha=0.3)
+    plt.plot(signal_original, 'r:', alpha=0.3, linewidth=1.0)
+    plt.plot(s_rec / max(s_rec), 'b', alpha=0.3, linewidth=1.0)
+    plt.legend(('Noisy', 'Clean', 'Denoised Estimate'))
+    plt.title('')
+    plt.show()
 
-    # plt.close('all')
-    # plt.figure()
-    # plt.plot(D_stack[0], 'm', alpha=0.3)
-    # plt.title('First dictionary atom (element) added to the solution')
-    # plt.show()
+    plt.close('all')
+    plt.figure()
+    plt.plot(D_stack[0], 'm', alpha=0.3)
+    plt.title('First dictionary atom (element) added to the solution')
+    plt.show()
 
     #logging.info('s_rec', s_rec)
 
-    # Output the WAV files. Note we also re-make the original, as encoding degrades (so it's only fair)
+    Output the WAV files. Note we also re-make the original, as encoding degrades (so it's only fair)
     librosa.output.write_wav("original.wav", signal_original, fs)
     librosa.output.write_wav("dataset/noisy_%s.wav" % str(fraction_to_drop), signal,
                              fs)
     librosa.output.write_wav(
-        "dataset/adaptive_%s_%s_%d_%d_%d_%d.wav" % (audio, str(fraction_to_drop), k,
-                                              r, numSamples, speed_over_accuracy), s_rec / np.max(s_rec), fs)
+        "dataset/adaptive_%s_%s_%d_%d.wav" % (audio, str(fraction_to_drop), k,
+                                              r), s_rec / np.max(s_rec), fs)

@@ -6,12 +6,10 @@
 #SBATCH -J adaptive
 #SBATCH -p shared
 
-ks=(60)
-rs=(1)
-fraction_to_drops=(0.50)
-audios=('alexa')
-num_sampless=(72 144)
-speed_over_accuracys=(1 0)
+ks=(60 80 100 150 200 250 300 400 500)
+rs=(4 6 8 10 12)
+fraction_to_drops=(0.05 0.10 0.15 0.18 0.20 0.30 0.40 0.50)
+audios=('alexa' 'piano' 'marshmello')
 
 for k in ${ks[@]}
 do
@@ -21,20 +19,12 @@ for audio in ${audios[@]}
 do
 for fraction_to_drop in ${fraction_to_drops[@]}
 do
-for num_samples in ${num_sampless[@]}
-do
-for speed_over_accuracy in ${speed_over_accuracys[@]}
-do
 ./main_helper.sh \
 $fraction_to_drop \
 $k \
 $r \
 $audio \
-$num_samples \
-$speed_over_accuracy
 
-done
-done
 done
 done
 done

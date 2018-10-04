@@ -1,0 +1,22 @@
+10/04/2018 08:01:47 PM: Namespace(audio='call', fraction_to_drop=0.5, k=100, num_samples=144, r=12, speed_over_accuracy=1)
+10/04/2018 08:01:47 PM: num_cores:
+10/04/2018 08:01:47 PM: 72
+10/04/2018 08:01:47 PM: Parallelize sampling.
+10/04/2018 08:01:47 PM: The signal length is 2120640: 
+10/04/2018 08:01:47 PM: The number of frames 'K' is 4141: 
+10/04/2018 08:01:47 PM: The length of each frame 'L' is 512: 
+10/04/2018 08:01:51 PM: START
+10/04/2018 08:01:51 PM: [0.0, 'ground set remaining:', 176679, 'size of current solution:', 0]
+10/04/2018 08:02:04 PM: [79.14583494113141, 'ground set remaining:', 176671, 'size of current solution:', 8]
+10/04/2018 08:02:18 PM: [153.02805968577897, 'ground set remaining:', 176663, 'size of current solution:', 16]
+10/04/2018 08:02:33 PM: [224.6978441619366, 'ground set remaining:', 176655, 'size of current solution:', 24]
+10/04/2018 08:02:48 PM: [293.44912329837524, 'ground set remaining:', 176647, 'size of current solution:', 32]
+10/04/2018 08:03:02 PM: [359.5811546485852, 'ground set remaining:', 176639, 'size of current solution:', 40]
+10/04/2018 08:03:15 PM: [424.8981279617906, 'ground set remaining:', 176631, 'size of current solution:', 48]
+10/04/2018 08:03:30 PM: [489.02112117490185, 'ground set remaining:', 176623, 'size of current solution:', 56]
+10/04/2018 08:03:44 PM: [553.2289603584545, 'ground set remaining:', 176615, 'size of current solution:', 64]
+10/04/2018 08:03:59 PM: [615.8910292455514, 'ground set remaining:', 176607, 'size of current solution:', 72]
+10/04/2018 08:04:13 PM: [675.8468773363049, 'ground set remaining:', 176599, 'size of current solution:', 80]
+10/04/2018 08:04:27 PM: [737.2954020860809, 'ground set remaining:', 176591, 'size of current solution:', 88]
+10/04/2018 08:04:41 PM: [798.8270351587876, 'ground set remaining:', 176583, 'size of current solution:', 96]
+10/04/2018 08:04:57 PM: STOP

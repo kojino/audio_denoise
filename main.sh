@@ -6,7 +6,7 @@
 #SBATCH -J adaptive
 #SBATCH -p shared
 
-ks=(40 100)
+ks=(80)
 rs=(12)
 fraction_to_drops=(0.50)
 audios=('call' 'billy')

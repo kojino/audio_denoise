@@ -26,46 +26,12 @@ logging.info('num_cores:')
 logging.info(num_cores)
 
 logging.info('Fetching Files')
-# bio regression experiment
-foldername = 'FOR_YARON/'
-filename = 'all_tissues_batch1_20180908_log_tpm.txt'
-# read in feature matrix
-nrow = 10633
-ncol = 8979
-parallel = True
-# init matrix
-X_train = np.zeros((nrow, ncol))
 
-# fill feature space
-file = open(foldername + filename, "r")
+X1 = scipy.sparse.load_npz('x_data.npz')
+y_cat = np.load('y_data.npy')
 
-rows = []
-cols = []
-vals = []
-for aline in file.readlines():
-    values = aline.split()
-    rows.append(int(values[0]) - 1)
-    cols.append(int(values[1]) - 1)
-    vals.append(float(values[2]))
-
-file.close()
-
-X = scipy.sparse.coo_matrix((vals, (rows, cols)), shape=(nrow, ncol))
-X = X.T
-X.shape
-
-# import y
-filename = 'all_tissues_batch1_20180908_meta.txt'
-
-file = open(foldername + filename, "r")
-
-y_cat = []
-for aline in file.readlines():
-    values = aline.split()
-    y_cat.append(values[4])
-file.close()
-
-logging.info('Finished Parsing Files')
+all_predictors = list(range(X1.shape[1]))
+logging.info('Num Features: ' + str(len(all_predictors)))
 
 
 def get_class_rate(x_t, y_t):

@@ -87,7 +87,7 @@ def union(A, B):
 
 
 # alg 3/6
-def amortizedFilter(k, r, ep, OPT, X, debug=True, parallel=False):
+def amortizedFilter(k, r, ep, OPT, X, debug=False, parallel=False):
 
     m = 10
     S = []
@@ -159,8 +159,8 @@ y_cat = np.load('y_data.npy')
 all_predictors = list(range(X1.shape[1]))
 logging.info('Num Features: ' + str(len(all_predictors)))
 
-k = 10
-r = 5
+k = 50
+r = 2
 ep = 0.01
 OPT = 0.5
 logging.info('START')

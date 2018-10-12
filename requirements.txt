@@ -1,0 +1,6 @@
+
+boto3==1.7.10
+scikit-image
+scikit-learn
+pandas
+scipy

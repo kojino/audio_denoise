@@ -19,7 +19,7 @@ logging.basicConfig(
     datefmt='%m/%d/%Y %I:%M:%S %p',
     filename='greedy.log',
     filemode='w')
-
+parallel = True
 # logging.info num cores
 num_cores = multiprocessing.cpu_count()
 logging.info('num_cores:')
@@ -43,13 +43,6 @@ def get_class_rate(x_t, y_t):
     return class_rate
 
 
-X1 = scipy.sparse.csr_matrix(X)
-
-X1_cols = np.load('cols_to_use_2.npy')
-
-all_predictors = X1_cols
-
-
 def run_greedy(kToSelect, parallel):
     # get starting set of data
     predictors = [([], -1e10)]
@@ -62,23 +55,24 @@ def run_greedy(kToSelect, parallel):
 
         predictor_list = list(set(all_predictors) - set(best_k_predictors))
 
-        def greedy_helper():
+        def greedy_helper(predictor):
             k_plus_1 = list(best_k_predictors + [predictor])
             x_train = X1[:, k_plus_1]
             return get_class_rate(x_train, y_cat)
 
         if parallel:
             r2 = Parallel(
-                n_jobs=-1, verbose=50)(
-                    delayed(greedy_helper)() for predictor in predictor_list)
+                n_jobs=-1, verbose=50)(delayed(greedy_helper)(predictor)
+                                       for predictor in predictor_list)
         else:
             r2 = []
             for predictor in predictor_list:
-                r2.append(greedy_helper())
+                r2.append(greedy_helper(predictor))
 
         best_k_plus_1 = best_k_predictors + [predictor_list[np.argmax(r2)]]
         predictors.append((best_k_plus_1, np.max(r2)))
-        logging.info(k, best_k_plus_1, np.max(r2))
+        logging.info(
+            "%s %s %s" % (str(k), str(best_k_plus_1), str(np.max(r2))))
     return predictors
 
 

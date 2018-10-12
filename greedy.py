@@ -117,7 +117,7 @@ def run_greedy(kToSelect, parallel):
 
 
 logging.info('START')
-predictors = run_greedy(50, parallel)
+predictors = run_greedy(10, parallel)
 logging.info('END')
 import pickle as pkl
 pickle.dump(predictors, 'greedy.p')

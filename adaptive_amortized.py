@@ -202,7 +202,7 @@ all_predictors = X1_cols
 all_predictors = list(range(X1.shape[1]))
 logging.info('Num Features: ' + str(len(all_predictors)))
 
-k = 50
+k = 10
 r = 5
 ep = 0.01
 OPT = 0.5
